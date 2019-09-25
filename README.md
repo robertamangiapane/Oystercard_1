@@ -28,6 +28,12 @@ As a customer
 I need my fare deducted from my card`
 
 Objects | Messages
+`In order to pay for my journey
+As a customer
+When my journey is complete, I need the correct amount deducted from my card`
+
+
+Objects | Messages
         | Deduct amount from card
 `In order to get through the barriers.
 As a customer
@@ -44,7 +50,22 @@ Objects | Messages
 
 `In order to pay for my journey
 As a customer
-When my journey is complete, I need the correct amount deducted from my card`
+I need to know where I've travelled from`
 
 Objects | Messages
-        |
+customer |
+card    | record_entry_station
+entry_station
+
+card ---> record_entry_station <--- entry_station
+
+`In order to know where I have been
+As a customer
+I want to see all my previous trips`
+
+Objects | Messages
+customer |
+card    | 
+journey_history | journey_history
+
+card ---> record_journey_history <--- journey_station
