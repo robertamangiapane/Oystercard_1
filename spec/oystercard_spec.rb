@@ -12,12 +12,19 @@ describe Oystercard do
         oyster.top_up(5)
         expect(oyster.balance).to eq 5
       end
+      # --> Test not needed at the end of step10 as method moved to private
+      # it 'deducts balance with given amount' do
+      #   oyster = Oystercard.new
+      #   oyster.top_up(10)
+      #   oyster.deduct(5)
+      #   expect(oyster.balance).to eq 5
+      # end
 
-      it 'deducts balance with given amount' do
+      it 'deducts minimum balance on #touch_out' do
         oyster = Oystercard.new
         oyster.top_up(10)
-        oyster.deduct(5)
-        expect(oyster.balance).to eq 5
+        oyster.touch_in
+        expect { oyster.touch_out }.to change { oyster.balance }.by(-Oystercard::MIN_BALANCE)
       end
   end
 
