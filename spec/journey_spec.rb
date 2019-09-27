@@ -4,7 +4,7 @@ describe Journey do
 
   let(:journey) { described_class.new}
   let(:entry_station) { "aldgate" }
-  let(:exit_station) { "bank" }
+  let(:exit_station) { 'bank' }
 
   describe '#start' do
     it 'starts a journey and records entry_station' do
@@ -14,7 +14,25 @@ describe Journey do
 
   describe '#end' do
     it "end a journey and records exit_station" do
-      expect(journey.end(exit_station)).to eq "bank"
+      expect(journey.end(exit_station)).to eq 'bank'
+    end
+  end
+
+  describe '#complete?' do
+    it 'checks if journey has an entry_station and an exit_station' do
+      journey.start(entry_station)
+      journey.end(exit_station)
+      expect(journey.complete?).to eq true
+    end
+
+    it 'checks if journey has only entry_station' do
+      journey.start(entry_station)
+      expect(journey.complete?).to eq false
+    end
+
+    it 'checks if journey has only exit_station' do
+      journey.end(exit_station)
+      expect(journey.complete?).to eq false
     end
   end
 
