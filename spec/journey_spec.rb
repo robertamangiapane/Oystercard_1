@@ -2,9 +2,41 @@ require 'journey'
 
 describe Journey do
 
-  let(:journey) { described_class.new}
   let(:entry_station) { "aldgate" }
+  let(:journey) { described_class.new(entry_station) }
   let(:exit_station) { 'bank' }
+
+  describe '#initialize' do
+    it 'starts with an entry station argument' do
+      expect(journey).to receive(:new).with(1).argument
+    end
+
+    it 'starts the journey class with a minimum fare' do
+      expect(journey.min_fare).to eq Journey::MIN_FARE
+    end
+
+    it 'starts the journey with a penalty fare' do
+      expect(journey.penalty_fare).to eq Journey::PENALTY_FARE
+    end
+
+    it 'starts a journey with a journey non complete' do
+      expect(journey.complete).to eq false
+    end
+
+    it 'starts a journey with an entry station' do
+      expect(journey.entry_station).to eq entry_station
+    end
+  end
+
+#   it 'displays 0' do
+#     expect(subject.balance).to eq 0
+#   end
+# # end
+#   it 'starts with an empty list of journeys' do
+#     # oyster = Oystercard.new
+#     expect(oyster.journeys).to be_empty
+#   end
+# end
 
   describe '#start' do
     it 'starts a journey and records entry_station' do
@@ -22,7 +54,7 @@ describe Journey do
     it 'checks if journey has an entry_station and an exit_station' do
       journey.start(entry_station)
       journey.end(exit_station)
-      expect(journey.completed_journey).to eq true
+      expect { journey.completed_journey }.to change(journey.complete).from(false).to(true)
     end
 
     it 'checks if journey has only entry_station' do
