@@ -2,20 +2,27 @@ require 'journey'
 
 describe Journey do
 
-  let (:journey) { described_class.new}
-  let (:entry_station) { "aldgate" }
+  let(:journey) { described_class.new}
+  let(:entry_station) { "aldgate" }
+  let(:exit_station) { "bank" }
 
   describe '#start' do
-    it "starts a journey and records entry_station" do
-      expect(journey.start(entry_station)).to eq "aldgate"
+    it 'starts a journey and records entry_station' do
+      expect(journey.start(entry_station)).to eq 'aldgate'
     end
   end
 
-  # describe '#end' do
-  #
-  # end
-  #
-  # describe '#fare' do
-  #
-  # end
+  describe '#end' do
+    it "end a journey and records exit_station" do
+      expect(journey.end(exit_station)).to eq "bank"
+    end
+  end
+
+  describe '#fare' do
+    it 'charges a fare when entry_station and exit_station are presents' do
+      journey.start(entry_station)
+      journey.end(exit_station)
+      expect(journey.fare).to eq journey.min_fare
+    end
+  end
 end
