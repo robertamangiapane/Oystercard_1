@@ -19,10 +19,14 @@ describe Journey do
   end
 
   describe '#fare' do
-    it 'charges a fare when entry_station and exit_station are presents' do
+    it 'charges a fare when entry_station and exit_station are present' do
       journey.start(entry_station)
       journey.end(exit_station)
       expect(journey.fare).to eq journey.min_fare
+    end
+    it 'charges a penalty fare if entry_station or exit_station are not present' do
+      journey.start(entry_station)
+      expect(journey.fare).to eq journey.penalty_fare
     end
   end
 end
