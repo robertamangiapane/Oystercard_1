@@ -18,21 +18,21 @@ describe Journey do
     end
   end
 
-  describe '#complete?' do
+  describe '#complete' do
     it 'checks if journey has an entry_station and an exit_station' do
       journey.start(entry_station)
       journey.end(exit_station)
-      expect(journey.complete?).to eq true
+      expect(journey.completed_journey).to eq true
     end
 
     it 'checks if journey has only entry_station' do
       journey.start(entry_station)
-      expect(journey.complete?).to eq false
+      expect(journey.completed_journey).to eq false
     end
 
     it 'checks if journey has only exit_station' do
       journey.end(exit_station)
-      expect(journey.complete?).to eq false
+      expect(journey.completed_journey).to eq false
     end
   end
 

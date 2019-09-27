@@ -20,15 +20,17 @@ class Journey
     @exit_station = exit_station
   end
 
-  def complete?
+  def completed_journey
     if @entry_station.nil? || @exit_station.nil?
-      @complete
+      @complete = false
     else
-      true
+      @complete = true
     end
+    @entry_station = nil
+    @exit_station = nil
   end
 
   def fare
-    complete? ? @min_fare : @penalty_fare
+    @complete ? @min_fare : @penalty_fare
   end
 end
