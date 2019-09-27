@@ -1,27 +1,14 @@
 require 'oystercard'
 
 describe Oystercard do
-  let (:oyster) { described_class.new}
-  let (:entry_station) { double :entry_station }
-  let (:exit_station) { double :exit_station }
-  # --> Test not needed at the end of step10 as method moved to private
-  # it 'deducts balance with given amount' do
-  #   oyster = Oystercard.new
-  #   oyster.top_up(10)
-  #   oyster.deduct(5)
-  #   expect(oyster.balance).to eq 5
-  # end
+  let(:oyster) { described_class.new}
+  let(:entry_station) { double :entry_station }
+  let(:exit_station) { double :exit_station }
 
   describe '#intialize' do
-    # context 'balance is 0' do
       it 'displays 0' do
         expect(subject.balance).to eq 0
       end
-    # end
-      # it 'starts with an empty list of journeys' do
-      #   # oyster = Oystercard.new
-      #   expect(oyster.journeys).to be_empty
-      # end
   end
 
   describe '#top_up' do
@@ -43,14 +30,12 @@ describe Oystercard do
   describe '#touch_out' do
 
     it 'deducts minimum balance on #touch_out' do
-      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       expect { oyster.touch_out(exit_station) }.to change { oyster.balance }.by(-Oystercard::MIN_BALANCE)
     end
 
     it 'clears entry_station on #touch_out' do
-      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       oyster.touch_out(exit_station)
@@ -58,13 +43,11 @@ describe Oystercard do
     end
 
     it 'it records exit station on #touch_out' do
-      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       oyster.touch_out(exit_station)
       expect(oyster.exit_station).to eq exit_station
     end
-
   end
 
   describe '#touch_in' do
@@ -96,14 +79,12 @@ describe Oystercard do
     end
 
     it 'tells us if the user is currently touched in' do
-      # oyster = Oystercard.new
       oyster.top_up(5) #min_balance step 9: added this line to pass min_balance test
       oyster.touch_in(entry_station)
       expect(oyster.in_journey?).to eq true
     end
 
     it 'tells us if the user is currently touched out' do
-      # oyster = Oystercard.new
       oyster.touch_out(exit_station)
       expect(oyster.in_journey?).to eq false
     end

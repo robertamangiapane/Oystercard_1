@@ -30,7 +30,7 @@ class Journey
   end
 
   def save_journey
-    last_journey = { :entry_station => entry_station, :exit_station => exit_station }
+    last_journey = { entry_station: @entry_station, exit_station: @exit_station }
     @journeys << last_journey
   end
 

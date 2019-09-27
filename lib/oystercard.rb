@@ -9,12 +9,9 @@ class Oystercard
 
   def initialize
     @balance = 0
-
-    # @in_journey = false
   end
 
   def top_up(amount)
-    # @balance = @balance + amount
     raise "Error: Cannot top up, balance exceeds Maximum Balance £#{MAX_BALANCE}" if @balance + amount > MAX_BALANCE
     @balance = @balance + amount
   end
@@ -23,20 +20,15 @@ class Oystercard
     # @in_journey
     return true if @entry_station != nil
     false
-    # @entry_station != nil
-    # !!@entry_station
   end
 
   def touch_in(entry_station)
     raise "Error: Cannot touch in, your balance is less than minimum balance £#{MIN_BALANCE}" if @balance < MIN_BALANCE
-    # @in_journey = true
     @entry_station = entry_station
   end
 
   def touch_out(exit_station)
-    # @balance =  @balance - MIN_BALANCE #--> replaced with the deduct method which is being moved to private in the next step
     deduct(MIN_BALANCE)
-    # @in_journey = false
     @exit_station = exit_station
     # save_journey
     @entry_station = nil
@@ -53,9 +45,4 @@ class Oystercard
   def deduct(amount)
     @balance = @balance - amount
   end
-
-  # def balance
-  #   @balance
-  # end
-
 end

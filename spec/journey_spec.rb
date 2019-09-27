@@ -3,7 +3,7 @@ require 'journey'
 describe Journey do
 
   let(:journey) { described_class.new }
-  let(:entry_station) { "aldgate" }
+  let(:entry_station) { 'aldgate' }
   let(:exit_station) { 'bank' }
 
   describe '#initialize' do
@@ -63,11 +63,12 @@ describe Journey do
     end
   end
 
-  describe '#journeys' do
+  describe '#save_journey' do
     it 'it records last journey after #touch_in and #touch_out' do
       journey.start(entry_station)
       journey.end(exit_station)
-      expect(journey.journeys).to include( { :entry_station => entry_station, :exit_station => exit_station } )
+      journey.save_journey
+      expect(journey.journeys).to include({ entry_station: entry_station, exit_station: exit_station })
     end
   end
 end
