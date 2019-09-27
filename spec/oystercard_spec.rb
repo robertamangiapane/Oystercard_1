@@ -18,10 +18,10 @@ describe Oystercard do
         expect(subject.balance).to eq 0
       end
     # end
-      it 'starts with an empty list of journeys' do
-        # oyster = Oystercard.new
-        expect(oyster.journeys).to be_empty
-      end
+      # it 'starts with an empty list of journeys' do
+      #   # oyster = Oystercard.new
+      #   expect(oyster.journeys).to be_empty
+      # end
   end
 
   describe '#top_up' do
@@ -110,14 +110,14 @@ describe Oystercard do
 
   end
 
-  describe '#journeys' do
-    it 'it records last journey after #touch_in and #touch_out' do
-      # oyster = Oystercard.new
-      oyster.top_up(10)
-      oyster.touch_in(entry_station)
-      oyster.touch_out(exit_station)
-      expect(oyster.journeys).to include({ :entry_station => entry_station, :exit_station => exit_station })
-    end
-  end
+  # describe '#journeys' do
+  #   it 'it records last journey after #touch_in and #touch_out' do
+  #     # oyster = Oystercard.new
+  #     oyster.top_up(10)
+  #     oyster.touch_in(entry_station)
+  #     oyster.touch_out(exit_station)
+  #     expect(oyster.journeys).to include({ :entry_station => entry_station, :exit_station => exit_station })
+  #   end
+  # end
 
 end
