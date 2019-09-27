@@ -65,7 +65,29 @@ I want to see all my previous trips`
 
 Objects | Messages
 customer |
-card    | 
+card    |
 journey_history | journey_history
 
 card ---> record_journey_history <--- journey_station
+
+`In order to know how far I have travelled
+As a customer
+I want to know what zone a station is in`
+
+Objects | Messages
+customer|
+station | zone --> which zone is it?
+zone    |
+
+station ---> zone <--- return station zone
+
+`In order to be charged correctly
+As a customer
+I need a penalty charge deducted if I fail to touch in or out`
+
+Objects | Messages
+customer|
+card | penalty_deducted
+penalty_deducted | touch_in/touch_out
+
+card ---> penalty_deducted <--- fail to touch_in/touch_out

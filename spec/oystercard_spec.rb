@@ -1,6 +1,7 @@
 require 'oystercard'
 
 describe Oystercard do
+  let (:oyster) { described_class.new}
   let (:entry_station) { double :entry_station }
   let (:exit_station) { double :exit_station }
   # --> Test not needed at the end of step10 as method moved to private
@@ -18,7 +19,7 @@ describe Oystercard do
       end
     # end
       it 'starts with an empty list of journeys' do
-        oyster = Oystercard.new
+        # oyster = Oystercard.new
         expect(oyster.journeys).to be_empty
       end
   end
@@ -26,13 +27,13 @@ describe Oystercard do
   describe '#top_up' do
 
     it 'tops up balance with given amount' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(5)
       expect(oyster.balance).to eq 5
     end
 
     it 'throws an error if balance is greater than £90' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(Oystercard::MAX_BALANCE)
       expect { oyster.top_up(1) }.to raise_error "Error: Cannot top up, balance exceeds Maximum Balance £#{Oystercard::MAX_BALANCE}"
     end
@@ -42,14 +43,14 @@ describe Oystercard do
   describe '#touch_out' do
 
     it 'deducts minimum balance on #touch_out' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       expect { oyster.touch_out(exit_station) }.to change { oyster.balance }.by(-Oystercard::MIN_BALANCE)
     end
 
     it 'clears entry_station on #touch_out' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       oyster.touch_out(exit_station)
@@ -57,7 +58,7 @@ describe Oystercard do
     end
 
     it 'it records exit station on #touch_out' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       oyster.touch_out(exit_station)
@@ -69,20 +70,20 @@ describe Oystercard do
   describe '#touch_in' do
 
     it 'throws an error if balance is less than £1' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(0.40)
       expect { oyster.touch_in(entry_station) }.to raise_error "Error: Cannot touch in, your balance is less than minimum balance £#{Oystercard::MIN_BALANCE}"
     end
 
     it 'it records entry station on #touch_in' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       expect(oyster.entry_station).to eq entry_station
     end
 
     it '#touch_in takes an arguement: entry station' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       expect(oyster).to respond_to(:touch_in).with(1).argument
     end
   end
@@ -90,19 +91,19 @@ describe Oystercard do
   describe '#in_journey?' do
 
     it 'it tells us if the user is currently on a journey, #in_journey?' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       expect(oyster.in_journey?).to eq false
     end
 
     it 'tells us if the user is currently touched in' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(5) #min_balance step 9: added this line to pass min_balance test
       oyster.touch_in(entry_station)
       expect(oyster.in_journey?).to eq true
     end
 
     it 'tells us if the user is currently touched out' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.touch_out(exit_station)
       expect(oyster.in_journey?).to eq false
     end
@@ -111,11 +112,11 @@ describe Oystercard do
 
   describe '#journeys' do
     it 'it records last journey after #touch_in and #touch_out' do
-      oyster = Oystercard.new
+      # oyster = Oystercard.new
       oyster.top_up(10)
       oyster.touch_in(entry_station)
       oyster.touch_out(exit_station)
-      expect(oyster.journeys).to include({ :entry_station => :entry_station, :exit_station => :exit_station })
+      expect(oyster.journeys).to include({ :entry_station => entry_station, :exit_station => exit_station })
     end
   end
 
